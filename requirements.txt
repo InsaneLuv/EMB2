@@ -1,0 +1,7 @@
+aiogram==2.23.1
+python-dotenv==0.21.0
+asyncio==3.4.3
+XlsxWriter==3.0.3
+aiohttp==3.8.3
+colorlog==6.7.0
+Flask==2.2.2

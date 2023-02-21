@@ -1,0 +1,191 @@
+┌——————————————————————————————————————┐
+
+20-02-2023 21:35
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 58, in clan_join
+    result = await paper_parse_clan(answer, "event")
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 214, in paper_parse_clan
+    return await run(urls_res, "event")
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 276, in run
+    result = await create_dict(result, session, pages)
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 231, in create_dict
+    result.update(await get_player_info(urls['urs_for_meta'], session))
+KeyError: 'urs_for_meta'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=fdbcb0b8320424857df9b277f2f842d0/3f8a22f4fd1eaae653efef03629ea7b5,https://press.cheapshot.co/view.html?id=00f05d6d3b8eb1755cdefd17c6bf5091/73165c925c15b6482416a7c1cf00ed36,https://press.cheapshot.co/view.html?id=b85613a73e94521c6beca7ceb1a3f92f/7b2c821d1309645534a8cca5f75ea919,https://press.cheapshot.co/view.html?id=c2e3d744e588292039d0f43478805f29/6ad8a07869a51aa306603dd809e3c584,https://press.cheapshot.co/view.html?id=95097c805eaf856cf0c087616023ee19/c006494960a6d6ade1a1aff2ea3e01f3
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+20-02-2023 21:36
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 58, in clan_join
+    result = await paper_parse_clan(answer, "event")
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 214, in paper_parse_clan
+    return await run(urls_res, "event")
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 275, in run
+    result = await create_dict(result, session, pages)
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 234, in create_dict
+    result['destroys'] = await get_destroys(urls['url_for_destroys, playerdata'], session)
+KeyError: 'url_for_destroys, playerdata'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=fdbcb0b8320424857df9b277f2f842d0/3f8a22f4fd1eaae653efef03629ea7b5,https://press.cheapshot.co/view.html?id=00f05d6d3b8eb1755cdefd17c6bf5091/73165c925c15b6482416a7c1cf00ed36,https://press.cheapshot.co/view.html?id=b85613a73e94521c6beca7ceb1a3f92f/7b2c821d1309645534a8cca5f75ea919,https://press.cheapshot.co/view.html?id=c2e3d744e588292039d0f43478805f29/6ad8a07869a51aa306603dd809e3c584,https://press.cheapshot.co/view.html?id=95097c805eaf856cf0c087616023ee19/c006494960a6d6ade1a1aff2ea3e01f3
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:02
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 58, in clan_join
+    result = await paper_parse_clan(answer, "event")
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 213, in paper_parse_clan
+    return await run(urls_res, "event")
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 282, in run
+    result = await create_dict(result, session, pages)
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 232, in create_dict
+    result['pdragons'] = await get_pdragon_kills(urls['url_for_kills'], session)
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 87, in get_pdragon_kills
+    for i in kills["from"]["items"]:
+KeyError: 'items'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:04
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 58, in clan_join
+    result = await paper_parse_clan(answer, "event")
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 216, in paper_parse_clan
+    return await run(urls_res, "event")
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 285, in run
+    result = await create_dict(result, session, pages)
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 237, in create_dict
+    result['monuments'] = await get_monuments_destroyed(urls['url_for_destroys'], session)
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 132, in get_monuments_destroyed
+    with open("destroyedmonuments.txt", 'r', encoding="utf-8") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'destroyedmonuments.txt'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:05
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 68, in clan_join
+    filename = await epit_clan(result, message.from_user.id,'🌲')
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 296, in epit_clan
+    filename = f'{raw_papers[0]["clantag"]}-{unique}_{str(timestamp)}.xlsx'
+KeyError: 'clantag'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:07
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 68, in clan_join
+    filename = await epit_clan(result, message.from_user.id,'🌲')
+  File "C:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 296, in epit_clan
+    filename = f'{raw_papers[0]["clantag"]}-{unique}_{str(timestamp)}.xlsx'
+KeyError: 'clantag'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:08
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 68, in clan_join
+    filename = await epit_clan(result, message.from_user.id,'🌲')
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 296, in epit_clan
+    filename = f'{raw_papers[0]["clantag"]}-{unique}_{str(timestamp)}.xlsx'
+KeyError: 'clantag'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:10
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 68, in clan_join
+    filename = await epit_clan(result, message.from_user.id,'🌲')
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 305, in epit_clan
+    worksheet.write_url(0, count, paper["url"], name_format, string=paper['username'])
+KeyError: 'url'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
+┌——————————————————————————————————————┐
+
+21-02-2023 00:12
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\handlers\users\parse_papers_clan.py", line 68, in clan_join
+    filename = await epit_clan(result, message.from_user.id,'🌲')
+  File "c:\Users\luv\Desktop\bot\venv\Event-Manager-Bot\tools\parse_tool_clan\paper_parser_clan.py", line 347, in epit_clan
+    for i in paper['buildings']:
+KeyError: 'buildings'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=9bd5d5a8e6b8c56d64476e4f0086a767/9b7f34507aa584c4a1b2b21aac4b8b84,https://press.cheapshot.co/view.html?id=41d20332cf7ab548e275abf2066123df/1e57c83b5f6d7f71c75cd4e0c027b06b,https://press.cheapshot.co/view.html?id=14b229cd9721cd9f16fead3cee986445/f5957e746332a2d6b1952a1ce966eef2,https://press.cheapshot.co/view.html?id=97cba4d409998d2c02cce8ea19fa6522/958649e7ac636f9b5960296a9d36c7ed,https://press.cheapshot.co/view.html?id=89c43a79a266b505e08669178f13d715/e98c9ab713e622fc44c4ce3997235aeb,https://press.cheapshot.co/view.html?id=590ca09f04d418673ce27c693d7bcfab/72e7bb6e781944f4bf67bae824122efe,https://press.cheapshot.co/view.html?id=d70e3ded4cccad25073cccea2d37e5d6/faa391f14ea128300cee8f4b96cc4f80,https://press.cheapshot.co/view.html?id=d35e6c1b7bfcbb499c2c1ecee9d5e8c2/ab28adac7d8a855249a563d13d1dd28c,https://press.cheapshot.co/view.html?id=9974f33c93fecd79a40559553cc1cbee/daf018a8ecfb6556579999a3405a9ea2,https://press.cheapshot.co/view.html?id=ffb7507b71f352fbfdd000707549aa38/b7a4fb2cba4d76f49af0c4255518c6a9,https://press.cheapshot.co/view.html?id=468e97bbbb7f192d6ed733dd3bcff57d/dcdc9e0aec2f3d7974d634dc25d95f77,https://press.cheapshot.co/view.html?id=2cb5eb766aa3e0e86ce3b0b3c8777935/26cfd3fc82fdeb4f99c2b5dfdbf102bf,https://press.cheapshot.co/view.html?id=2ead322c6222491d4874a49c4985d2a9/6776d635f2f7bd3364dc5eaec0ab8433,https://press.cheapshot.co/view.html?id=e048963d4fa55430a66b3a1fea0ba206/eeb104489ea915d569a8cbc3768ab34c,https://press.cheapshot.co/view.html?id=87eb69b2df5a76f18dff9cef175910fa/b750bb7e3e0f34750d64a88a7cbffbec,https://press.cheapshot.co/view.html?id=d4b500e88957b18ea9913d7ac1bf4bf1/65d7b3d77020176b37e322d21549c84e,https://press.cheapshot.co/view.html?id=e6505e232838d0ad253b86e598c06319/cfad594e36edb872468d75f32ec43d12,https://press.cheapshot.co/view.html?id=2529b5d7bec8e975e1a84f3bdda9f887/d3a2eed6168a8f97c791fc8e833008d0,https://press.cheapshot.co/view.html?id=b0b74d6432392ea422c698e50ba9a10c/3189184715e02573132131d433f3ae44,https://press.cheapshot.co/view.html?id=e25f205a0d57bc40f055993a70af5e21/2dcefcd24b7d7c6aeeb639c139a29fab
+
+└——————————————————————————————————————┘
+
