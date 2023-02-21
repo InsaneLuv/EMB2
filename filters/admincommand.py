@@ -1,3 +1,4 @@
+import logging
 from aiogram import types
 from aiogram.dispatcher.filters import BoundFilter
 from aiogram.dispatcher.handler import CancelHandler
@@ -12,4 +13,5 @@ class AdminCommand(BoundFilter):
         if message.from_user.id in admins:
             return True
         else:
+            logging.info(f"User {message.from_user.id} is not an admin")
             return False

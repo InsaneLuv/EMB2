@@ -1,5 +1,6 @@
 import asyncio
 from datetime import datetime
+import logging
 import time
 import simplejson as json
 import re
@@ -278,7 +279,7 @@ async def exp_fetch_all(url, session, results_json):
 
 
 async def run(urls, mode):
-    start_time = datetime.now()
+    t = time.perf_counter()
 
     pattern2 = re.compile(r'(data\/)(.*)(\/)(.*)')
 
@@ -322,7 +323,7 @@ async def run(urls, mode):
             results_json.append(json.dumps(result,indent=4, sort_keys=True, separators=(',', ': '), use_decimal=True))
 
         responces = await exp_fetch_all(api_url, session, results_json)
-        print(f'{responces.count(200)} / {len(responces)} done in {datetime.now() - start_time}')
+        logging.warning(f'[{results[0]["clanname"]}] sent [{responces.count(200)} / {len(responces)}] to api. Elapsed time: [{{0:.3f}}] sec.'.format(time.perf_counter() - t))
 
         return results
 

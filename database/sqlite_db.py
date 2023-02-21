@@ -1,3 +1,4 @@
+import logging
 import sqlite3 as sq
 
 
@@ -7,7 +8,7 @@ async def sql_start():
     cur = base.cursor()
     
     if base:
-        print('db connected')
+        logging.info("Data base connected!")
 
     base.execute('CREATE TABLE IF NOT EXISTS profiles('
                  'tg_id PRIMARY KEY,'

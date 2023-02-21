@@ -1,3 +1,4 @@
+import logging
 from aiogram.types import CallbackQuery
 
 from filters import AdminCommand

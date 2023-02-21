@@ -2,5 +2,5 @@ from aiogram import types
 
 async def set_default_commands(dp):
     await dp.bot.set_my_commands([
-        types.BotCommand('start', '|💡 Start command & 🇷🇺➰🇬🇧 Switch language')
+        types.BotCommand('start', '💡 Start command \n🇷🇺➰🇬🇧 Switch language')
     ])

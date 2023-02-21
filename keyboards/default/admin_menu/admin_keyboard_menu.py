@@ -10,7 +10,7 @@ admin_kb_menu = ReplyKeyboardMarkup(
             KeyboardButton(text='👤 Профиль')
         ],
         [
-          KeyboardButton(text='TESTER')
+          KeyboardButton(text='👽 𝐀𝐃𝐌𝐈𝐍 𝐓𝐎𝐎𝐋𝐒')
         ]
     ],
     resize_keyboard=True

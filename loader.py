@@ -22,4 +22,3 @@ dp = Dispatcher(bot, storage=storage)
 i18n = setup_multilanguage(dp)
 _ = i18n.gettext
 __ = i18n.lazy_gettext
-

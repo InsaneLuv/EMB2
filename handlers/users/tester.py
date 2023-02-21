@@ -14,6 +14,6 @@ from utils.misc import rate_limit
 
 
 @rate_limit(limit=2)
-@dp.message_handler(AdminCommand(),lambda message: "tester" in message.text.lower())
+@dp.message_handler(AdminCommand(),lambda message: "👽" in message.text)
 async def tester_react(message: types.Message):
     a = await bot.send_message(chat_id=message.from_user.id, text=f'Test menu, choose test', reply_markup=tester_ikb_menu)

@@ -10,33 +10,14 @@ tools_ikb_menu = InlineKeyboardMarkup(row_width=2,
                                 inline_keyboard =[
                                     [
                                         # InlineKeyboardButton(text='🗂 Спарсить газеты', callback_data='Спарсить'),
-                                        InlineKeyboardButton(text='📍 Создать ивент', callback_data='Создать1'),
+                                        # InlineKeyboardButton(text='📍 Создать ивент', callback_data='Создать1'),
                                         InlineKeyboardButton(text='💥 Сломанные монументы', callback_data='dmonuments')
                                     ],
-                                    [
-                                        InlineKeyboardButton(text='🚨 Troublelogs', callback_data='tlogs'),
-                                        InlineKeyboardButton(text='🛎 Помощь', callback_data='Помощь')
-                                    ]
+                                    # [
+                                    #     InlineKeyboardButton(text='🚨 Troublelogs', callback_data='tlogs'),
+                                    #     InlineKeyboardButton(text='🛎 Помощь', callback_data='Помощь')
+                                    # ]
                                 ])
-
-file_or_message_ikb_menu = InlineKeyboardMarkup(row_width=2,
-                                inline_keyboard =[
-                                    [
-                                        InlineKeyboardButton(text='✉ Сообщение', callback_data='Сообщение'),
-                                        InlineKeyboardButton(text='💾 Текстовый файл', callback_data='Файл')
-                                    ],
-                                    [
-                                        InlineKeyboardButton(text='🧮 Таблица', callback_data='Таблица')
-                                    ]
-                                ])
-
-@dp.callback_query_handler(text="Помощь")
-async def send_message(call: CallbackQuery):
-    await call.bot.send_message(chat_id=call.from_user.id,text=
-    '🗂 Спарсить газеты - Получить результат из множества газет.\n'
-    'Правила ввода: Новая газета - новая строка\n\n'
-    '📍 Создать ивент - Создание ивента и добавление его в список текущих ивентов\n'
-    'В данный момент в разработке.')
 
 
 @dp.callback_query_handler(text="dmonuments")
