@@ -31,8 +31,8 @@ async def button_current_events_react(message: types.Message):
 async def command_any_unknown(message: types.Message, state: FSMContext):
     CancelHandler()
     await state.finish()
-    await dp.bot.send_message(chat_id=message.from_user.id, text='🚨 Действие отклонено\n'
-                                                                 '(Недопустимый ввод)')
+    await dp.bot.send_message(chat_id=message.from_user.id, text=_('🚨 Действие отклонено\n'
+                                                                 '(Недопустимый ввод)'))
 
 
 @dp.callback_query_handler(lambda call: True)
@@ -139,28 +139,6 @@ async def event_creator(call: CallbackQuery, state: FSMContext):
         )
         await ev_helper.edit_title.set()
 
-        @dp.message_handler(state=ev_helper.edit_title)
-        async def state10(message: types.Message, state: FSMContext):
-            data = await state.get_data()
-            event = data.get("event")
-            await event_update("name", message.text, event[1])
-            new_event = await search_event(message.text)
-            await state.update_data(event=new_event)
-            await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
-            if event is not None:
-                await dp.bot.edit_message_text(
-                chat_id=call.from_user.id,
-                message_id=call.message.message_id,
-                    text=
-                    f"🎖 Название: {new_event[1]}\n"
-                    f"📄 Описание: {new_event[2]}\n"
-                    f'🔗 Ссылка: {new_event[3]}\n'
-                    f'🔑 Доступ: {new_event[5]}',
-                    parse_mode='HTML',
-                    reply_markup=gen_event_markup(call.from_user.id, new_event[0])
-                )
-                await ev_helper.event.set()
-
     elif call.data == "Изменить_описание":
         await call.bot.edit_message_text(
             chat_id=call.from_user.id,
@@ -169,28 +147,6 @@ async def event_creator(call: CallbackQuery, state: FSMContext):
         )
         await ev_helper.edit_desc.set()
 
-        @dp.message_handler(state=ev_helper.edit_desc)
-        async def state10(message: types.Message, state: FSMContext):
-            data = await state.get_data()
-            event = data.get("event")
-            await event_update("description", message.text, event[1])
-            new_event = await search_event(event[1])
-            await state.update_data(event=new_event)
-            await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
-            if event is not None:
-                await dp.bot.edit_message_text(
-                chat_id=call.from_user.id,
-                message_id=call.message.message_id,
-                    text=
-                    f"🎖 Название: {new_event[1]}\n"
-                    f"📄 Описание: {new_event[2]}\n"
-                    f'🔗 Ссылка: {new_event[3]}\n'
-                    f'🔑 Доступ: {new_event[5]}',
-                    parse_mode='HTML',
-                    reply_markup=gen_event_markup(call.from_user.id, new_event[0])
-                )
-                await ev_helper.event.set()
-
     elif call.data == "Изменить_ссылку":
         await call.bot.edit_message_text(
             chat_id=call.from_user.id,
@@ -198,29 +154,6 @@ async def event_creator(call: CallbackQuery, state: FSMContext):
             text='🔗 Ссылка на сообщение'
         )
         await ev_helper.edit_url.set()
-
-        @dp.message_handler(state=ev_helper.edit_url)
-        async def state10(message: types.Message, state: FSMContext):
-            data = await state.get_data()
-            event = data.get("event")
-            await event_update("url", message.text, event[1])
-            new_event = await search_event(event[1])
-            await state.update_data(event=new_event)
-            await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
-            if event is not None:
-                await dp.bot.edit_message_text(
-                chat_id=call.from_user.id,
-                message_id=call.message.message_id,
-                    text=
-                    f"🎖 Название: {new_event[1]}\n"
-                    f"📄 Описание: {new_event[2]}\n"
-                    f'🔗 Ссылка: {new_event[3]}\n'
-                    f'📣 Организатор:  tg://user?id={new_event[0]}\n'
-                    f'🔑 Доступ: {new_event[5]}',
-                    parse_mode='HTML',
-                    reply_markup=gen_event_markup(call.from_user.id, new_event[0])
-                )
-                await ev_helper.event.set()
 
     elif call.data == "Завершить_ивент":
         data = await state.get_data()
@@ -250,28 +183,7 @@ async def event_creator(call: CallbackQuery, state: FSMContext):
         )
         await ev_helper.edit_access.set()
 
-        @dp.message_handler(state=ev_helper.edit_access)
-        async def state10(message: types.Message, state: FSMContext):
-            data = await state.get_data()
-            event = data.get("event")
-            await event_update("access", message.text, event[1])
-            new_event = await search_event(event[1])
-            await state.update_data(event=new_event)
-            await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
-            if event is not None:
-                await dp.bot.edit_message_text(
-                chat_id=call.from_user.id,
-                message_id=call.message.message_id,
-                    text=
-                    f"🎖 Название: {new_event[1]}\n"
-                    f"📄 Описание: {new_event[2]}\n"
-                    f'🔗 Ссылка: {new_event[3]}\n'
-                    f'🔑 Доступ: {new_event[5]}',
-                    parse_mode='HTML',
-                    reply_markup=gen_event_markup(call.from_user.id, new_event[0])
-                )
-                await ev_helper.event.set()
-
+    
     elif call.data == "points_rules":
         await call.bot.edit_message_text(
             chat_id=call.from_user.id,
@@ -297,34 +209,125 @@ async def event_creator(call: CallbackQuery, state: FSMContext):
         )
         await ev_helper.edit_psettings.set()
 
-        @dp.message_handler(state=ev_helper.edit_psettings)
-        async def state10(message: types.Message, state: FSMContext):
-            data = await state.get_data()
-            event = data.get("event")
-            await event_update("psettings", message.text, event[1])
-            new_event = await search_event(event[1])
-            await state.update_data(event=new_event)
-            await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
-            if event is not None:
-                await dp.bot.edit_message_text(
-                chat_id=call.from_user.id,
-                message_id=call.message.message_id,
-                    text=
-                    f"🎖 Название: {new_event[1]}\n"
-                    f"📄 Описание: {new_event[2]}\n"
-                    f'🔗 Ссылка: {new_event[3]}\n'
-                    f'🔑 Доступ: {new_event[5]}\n',
-                    parse_mode='HTML',
-                    reply_markup=gen_event_markup(call.from_user.id, new_event[0])
-                )
-                await ev_helper.event.set()
-
 
     elif call.data == "Назад":
         data = await state.get_data()
         event = data.get("event")
         await dp.bot.edit_message_reply_markup(message_id=call.message.message_id, chat_id=call.from_user.id,
                                                reply_markup=gen_event_markup(call.from_user.id, event[0]))
+        await ev_helper.event.set()
+
+    
+
+@dp.message_handler(state=ev_helper.edit_title)
+async def state10(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    event = data.get("event")
+    await event_update("name", message.text, event[1])
+    new_event = await search_event(message.text)
+    await state.update_data(event=new_event)
+    await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
+    if event is not None:
+        await dp.bot.edit_message_text(
+        chat_id=message.from_user.id,
+        message_id=message.message_id,
+            text=
+            f"🎖 Название: {new_event[1]}\n"
+            f"📄 Описание: {new_event[2]}\n"
+            f'🔗 Ссылка: {new_event[3]}\n'
+            f'🔑 Доступ: {new_event[5]}',
+            parse_mode='HTML',
+            reply_markup=gen_event_markup(message.from_user.id, new_event[0])
+        )
+        await ev_helper.event.set()
+
+@dp.message_handler(state=ev_helper.edit_desc)
+async def state10(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    event = data.get("event")
+    await event_update("description", message.text, event[1])
+    new_event = await search_event(event[1])
+    await state.update_data(event=new_event)
+    await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
+    if event is not None:
+        await dp.bot.edit_message_text(
+        chat_id=message.from_user.id,
+        message_id=message.message_id,
+            text=
+            f"🎖 Название: {new_event[1]}\n"
+            f"📄 Описание: {new_event[2]}\n"
+            f'🔗 Ссылка: {new_event[3]}\n'
+            f'🔑 Доступ: {new_event[5]}',
+            parse_mode='HTML',
+            reply_markup=gen_event_markup(message.from_user.id, new_event[0])
+        )
+        await ev_helper.event.set()
+
+@dp.message_handler(state=ev_helper.edit_url)
+async def state10(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    event = data.get("event")
+    await event_update("url", message.text, event[1])
+    new_event = await search_event(event[1])
+    await state.update_data(event=new_event)
+    await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
+    if event is not None:
+        await dp.bot.edit_message_text(
+        chat_id=message.from_user.id,
+        message_id=message.message_id,
+            text=
+            f"🎖 Название: {new_event[1]}\n"
+            f"📄 Описание: {new_event[2]}\n"
+            f'🔗 Ссылка: {new_event[3]}\n'
+            f'📣 Организатор:  tg://user?id={new_event[0]}\n'
+            f'🔑 Доступ: {new_event[5]}',
+            parse_mode='HTML',
+            reply_markup=gen_event_markup(message.from_user.id, new_event[0])
+        )
+        await ev_helper.event.set()
+
+@dp.message_handler(state=ev_helper.edit_access)
+async def state10(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    event = data.get("event")
+    await event_update("access", message.text, event[1])
+    new_event = await search_event(event[1])
+    await state.update_data(event=new_event)
+    await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
+    if event is not None:
+        await dp.bot.edit_message_text(
+        chat_id=message.from_user.id,
+        message_id=message.message_id,
+            text=
+            f"🎖 Название: {new_event[1]}\n"
+            f"📄 Описание: {new_event[2]}\n"
+            f'🔗 Ссылка: {new_event[3]}\n'
+            f'🔑 Доступ: {new_event[5]}',
+            parse_mode='HTML',
+            reply_markup=gen_event_markup(message.from_user.id, new_event[0])
+        )
+        await ev_helper.event.set()
+
+@dp.message_handler(state=ev_helper.edit_psettings)
+async def state10(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    event = data.get("event")
+    await event_update("psettings", message.text, event[1])
+    new_event = await search_event(event[1])
+    await state.update_data(event=new_event)
+    await dp.bot.delete_message(message_id=message.message_id,chat_id=message.from_user.id)
+    if event is not None:
+        await dp.bot.edit_message_text(
+        chat_id=message.from_user.id,
+        message_id=message.message_id,
+            text=
+            f"🎖 Название: {new_event[1]}\n"
+            f"📄 Описание: {new_event[2]}\n"
+            f'🔗 Ссылка: {new_event[3]}\n'
+            f'🔑 Доступ: {new_event[5]}\n',
+            parse_mode='HTML',
+            reply_markup=gen_event_markup(message.from_user.id, new_event[0])
+        )
         await ev_helper.event.set()
 
 

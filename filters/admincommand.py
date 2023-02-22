@@ -13,5 +13,5 @@ class AdminCommand(BoundFilter):
         if message.from_user.id in admins:
             return True
         else:
-            logging.info(f"User {message.from_user.id} is not an admin")
+            logging.warning(f"[@{message.from_user.username}] is not an admin. ")
             return False

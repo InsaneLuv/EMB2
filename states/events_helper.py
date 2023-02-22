@@ -9,4 +9,5 @@ class ev_helper(StatesGroup):
     edit_url = State()
     edit_state = State()
     edit_access = State()
+    edit_psettings = State()
 

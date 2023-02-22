@@ -49,7 +49,7 @@ headers = {
     'Content-Encoding': 'utf-8'
 }
 
-api_url = 'http://141.8.199.204:9000/clanevent/newspaper'
+api_url = 'https://clans.cheapshot.app/newspaper'
 
 
 async def get_player_clan(username, clanlist):
@@ -323,7 +323,10 @@ async def run(urls, mode):
             results_json.append(json.dumps(result,indent=4, sort_keys=True, separators=(',', ': '), use_decimal=True))
 
         responces = await exp_fetch_all(api_url, session, results_json)
-        logging.warning(f'[{results[0]["clanname"]}] sent [{responces.count(200)} / {len(responces)}] to api. Elapsed time: [{{0:.3f}}] sec.'.format(time.perf_counter() - t))
+        if responces.count(200) < len(responces):
+            logging.warning(f'[{results[0]["clanname"]}] got an error while sending results [{responces.count(200)} / {len(responces)}] to api. Elapsed time: [{{0:.1f}}] sec.\nResponces: {responces}'.format(time.perf_counter() - t))
+        else:
+            logging.info(f'[{results[0]["clanname"]}] sent [{responces.count(200)} / {len(responces)}] to api. Elapsed time: [{{0:.1f}}] sec.'.format(time.perf_counter() - t))
 
         return results
 

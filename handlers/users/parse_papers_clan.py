@@ -1,3 +1,4 @@
+from collections import Counter
 import os
 import time
 import traceback
@@ -7,8 +8,9 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import CancelHandler
 
-from data.config import admins
+from data.config import admins, test_paper
 from database.papers.papers import reg_papers
+from database.profile.profile import search_profile
 from loader import dp, _
 from loader import bot
 from states import parse_paper_clan
@@ -17,21 +19,31 @@ from tools.parse_tool_clan.paper_parser_clan import epit_clan
 from tools.troublelogger.troubleloger import troublelog
 import re
 
+
+async def answer_handler(message):
+    answer = message.text
+
+    try:
+        answer = int(answer)
+        answer = test_paper[answer]
+    except:
+        answer = message.text
+
+    if not answer.startswith(('https://press.cheapshot.co')):
+        return False
+    else:
+        return answer
+
+    
+
+
 @dp.message_handler(state=parse_paper_clan.paper_clan)
 async def clan_join(message: types.Message, state: FSMContext):
     start_time = time.time()
-    test = False
-    answer = message.text
-    if answer == "z":
-        answer = 'https://press.cheapshot.co/view.html?id=fdbcb0b8320424857df9b277f2f842d0%2F3f8a22f4fd1eaae653efef03629ea7b5\n' \
-                 'https://press.cheapshot.co/view.html?id=00f05d6d3b8eb1755cdefd17c6bf5091/73165c925c15b6482416a7c1cf00ed36\n' \
-                 'https://press.cheapshot.co/view.html?id=b85613a73e94521c6beca7ceb1a3f92f%2F7b2c821d1309645534a8cca5f75ea919\n' \
-                 'https://press.cheapshot.co/view.html?id=c2e3d744e588292039d0f43478805f29/6ad8a07869a51aa306603dd809e3c584\n' \
-                 'https://press.cheapshot.co/view.html?id=95097c805eaf856cf0c087616023ee19/c006494960a6d6ade1a1aff2ea3e01f3\n'
-        test = True
-    if not answer.startswith(('https://press.cheapshot.co')):
+    answer = await answer_handler(message)
+    if answer is False:
         await bot.send_message(chat_id=message.from_user.id, text=_('🚨 Действие отменено\n'
-                                                                  '(Некорректная ссылка)'))
+                                                                '(Некорректная ссылка)'))
         CancelHandler()
         await state.finish()
     else:
@@ -66,21 +78,36 @@ async def clan_join(message: types.Message, state: FSMContext):
             a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=a.message_id, text=_('{a}\n- Загрузка данных в таблицу...').format(a=a.text))
             filename = await epit_clan(result, message.from_user.id,'🌲')
             a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=a.message_id, text=_('{a}\n- Отправка таблицы организатору...').format(a=a.text))
+            from_profile = await search_profile('tg_id',message.from_user.id)
+            list_of_clans = []
+            for i in result:
+                list_of_clans.append(i['clanname'])
+
+            list_of_clans = Counter(list_of_clans)
+            
+            if message.from_user.id in admins:
+                test = True
+            else:
+                test = False
+
+                
             for admin in admins:
                 try:
                     if test is True:
                         await bot.send_document(admin,
-                                                document=open(filename, 'rb'),
-                                                caption=
-                                                f'✉ @{message.from_user.username} прислал газеты.\n'
-                                                f'Клан - {result[0]["clantag"]}\n\n'
-                                                f'🚨 - ТЕСТОВОЕ СООБЩЕНИЕ - 🚨')
+                        document=open(filename, 'rb'),
+                        caption=
+                        f'📥: <a href="https://t.me/{message.from_user.username}">{from_profile[1]}</a>\n'
+                        f'👨‍👨‍👦‍👦: {",".join(str(f"{clan}({count})") for clan,count in list_of_clans.items())} \n'
+                        f'📆: {result[0]["date"]}\n'
+                        f'🚨 - ТЕСТОВОЕ СООБЩЕНИЕ - 🚨', parse_mode="HTML")
                     else:
                         await bot.send_document(admin,
-                                                document=open(filename, 'rb'),
-                                                caption=
-                                                f'✉ @{message.from_user.username} прислал газеты.\n'
-                                                f'Клан - {result[0]["clantag"]}\n')
+                        document=open(filename, 'rb'),
+                        caption=
+                        f'📥: <a href="https://t.me/{message.from_user.username}">{from_profile[1]}</a>\n'
+                        f'👨‍👨‍👦‍👦: {",".join(str(f"{clan}({count})") for clan,count in list_of_clans.items())} \n'
+                        f'📆: {result[0]["date"]}', parse_mode="HTML")
                 except:
                     pass
             a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=a.message_id,
