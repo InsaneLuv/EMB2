@@ -76,6 +76,7 @@ async def call_organizer1(call: CallbackQuery, state: FSMContext):
                                               parse_mode='HTML')
                     await call.answer()
                 else:
+                    await dp.bot.delete_message(message_id=call.message.message_id, chat_id=call.from_user.id)
                     await dp.bot.send_message(chat_id=call.from_user.id,
                                               text=_('{emoji} '
                                                    'Отправь газеты.\n\n'

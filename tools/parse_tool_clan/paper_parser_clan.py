@@ -331,15 +331,26 @@ async def run(urls, mode):
         return results
 
 
-async def epit_clan(raw_papers, unique, building):
+async def epit_clan(raw_papers, unique):
     timestamp = strftime("%H-%M", gmtime())
-    filename = f'{raw_papers[0]["clanname"]}-{unique}_{str(timestamp)}.xlsx'
+    filename = f'{raw_papers[0]["clantag"]}-{unique}_{str(timestamp)}.xlsx'
     workbook = xlsxwriter.Workbook(filename)
     worksheet = workbook.add_worksheet()
     name_format = workbook.add_format()
     name_format.set_align('center')
     count = 1
 
+    date = raw_papers[0]["date"]
+
+    special = {
+        '2023-02-05': '🍄',
+        '2023-02-12': '🌳',
+        '2023-02-19': '🌲',
+        '2023-02-26': '🎄'
+    }
+
+
+    building = special[date]
 
     for paper in raw_papers:
         worksheet.write_url(0, count, paper["url"], name_format, string=paper['username'])
@@ -359,6 +370,7 @@ async def epit_clan(raw_papers, unique, building):
            'rat',
            'destroy',
            f'{building}',
+           'clanname',
            'date']
 
     worksheet.set_column(0, count, 13)

@@ -5,6 +5,7 @@ import traceback
 from operator import itemgetter
 from datetime import date
 from aiogram import types
+from aiogram.types import ContentTypes
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import CancelHandler
 
@@ -37,10 +38,27 @@ async def answer_handler(message):
     
 
 
-@dp.message_handler(state=parse_paper_clan.paper_clan)
+@dp.message_handler(state=parse_paper_clan.paper_clan, content_types=ContentTypes.ANY)
 async def clan_join(message: types.Message, state: FSMContext):
+    urls_from_paper = False
     start_time = time.time()
-    answer = await answer_handler(message)
+
+    if document := message.document:
+        await document.download(
+            destination_file=f"{message.from_user.id}-{message.from_user.username}.txt"
+        )
+        with open(f"{message.from_user.id}-{message.from_user.username}.txt", 'r') as url:
+            lines = [line.rstrip('\n') for line in url]
+
+        answer = ""
+
+        for i in lines:
+            answer += str(i)+ "," 
+        urls_from_paper = True
+
+    if urls_from_paper == False:
+        answer = await answer_handler(message)
+
     if answer is False:
         await bot.send_message(chat_id=message.from_user.id, text=_('🚨 Действие отменено\n'
                                                                 '(Некорректная ссылка)'))
@@ -49,8 +67,8 @@ async def clan_join(message: types.Message, state: FSMContext):
     else:
         try:
             await message.answer_chat_action("upload_document")
-
             a = await bot.send_message(chat_id=message.from_user.id, text=_('- Компановка газет...'))
+
             paper = answer
             paper = re.sub('\n\n\n', '\n', paper)
             paper = re.sub('\n\n', '\n', paper)
@@ -71,12 +89,14 @@ async def clan_join(message: types.Message, state: FSMContext):
 
             a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=a.message_id,text=_('{a}\n- Сортировка...').format(a=a.text))
 
-            try:
-                result.sort(key=itemgetter('username'))
-            except:
-                pass
+            if urls_from_paper != True:
+                try:
+                    result.sort(key=itemgetter('username'))
+                except:
+                    pass
+
             a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=a.message_id, text=_('{a}\n- Загрузка данных в таблицу...').format(a=a.text))
-            filename = await epit_clan(result, message.from_user.id,'🌲')
+            filename = await epit_clan(result, message.from_user.id)
             a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=a.message_id, text=_('{a}\n- Отправка таблицы организатору...').format(a=a.text))
             from_profile = await search_profile('tg_id',message.from_user.id)
             list_of_clans = []
@@ -122,12 +142,12 @@ async def clan_join(message: types.Message, state: FSMContext):
             e = traceback.format_exc()
             await troublelog(message.from_user.username, e, answer)
             await bot.send_message(chat_id=message.from_user.id, text=f'🚨 ОШИБКА\n'
-                                                                      f'{e}\n\n'
-                                                                      f'Информация об ошибке уже отправлена разработчику бота, если есть вопросы - пишите:\n'
-                                                                      f'@spaghetti_coder')
+                                                                        f'{e}\n\n'
+                                                                        f'Информация об ошибке уже отправлена разработчику бота, если есть вопросы - пишите:\n'
+                                                                        f'@spaghetti_coder')
 
             for admin in admins:
                 await bot.send_message(chat_id=admin,
-                                       text=f'🚨 @{message.from_user.username} получил ошибку, ошибка внесена в troublelogs.\n {e}')
+                                        text=f'🚨 @{message.from_user.username} получил ошибку, ошибка внесена в troublelogs.\n {e}')
             CancelHandler()
             await state.finish()

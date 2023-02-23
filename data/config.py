@@ -17,7 +17,7 @@ LOCALES_DIR = BASE_DIR / 'locales'
 
 # 465989596
 admins = [
-    4659895961,
+    465989596,
     632473665
 ]
 
