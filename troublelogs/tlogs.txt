@@ -314,3 +314,22 @@ https://press.cheapshot.co/view.html?id=77de552e3b3f96c9a400b0c92550d4f0/2606aab
 
 └——————————————————————————————————————┘
 
+┌——————————————————————————————————————┐
+
+25-02-2023 02:24
+@spaghetti_coder trouble:
+
+Traceback (most recent call last):
+  File "C:\Users\luv\Desktop\EMB\handlers\users\parse_papers_clan.py", line 99, in clan_join
+    filename = await epit_clan(result, message.from_user.id)
+  File "C:\Users\luv\Desktop\EMB\tools\parse_tool_clan\paper_parser_clan.py", line 362, in epit_clan
+    building = special[date]
+KeyError: '2022-12-25'
+
+
+message text:
+
+https://press.cheapshot.co/view.html?id=19eb954abf9ba2f953cc73119f651707/55244453d5b1600fb71b2869e107486d
+
+└——————————————————————————————————————┘
+

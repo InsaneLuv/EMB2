@@ -2,7 +2,7 @@
 from .events import dp
 
 from .create_event import dp
-from .events import dp
+
 from .help import dp
 from .parse_papers_clan import dp
 from .profile import dp

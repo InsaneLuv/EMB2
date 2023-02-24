@@ -27,6 +27,9 @@ chat_ids = [
     -1001846244670
 ]
 
+settings = [
+    's_police', 's_police_heli', 's_police_car', 's_ordinary', 's_dragon', 's_pdragon', 's_alien','s_rat'
+]
 
 technical_messages = {
 

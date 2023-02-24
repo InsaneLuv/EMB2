@@ -19,28 +19,28 @@ from tools.troublelogger.troubleloger import troublelog
 
 clanlist = {'NOISY': '🧑‍🦽NOISY',
             '🧢': '🧢 • no cap',
+            '•🐽•': '•🐽•',
             '•YRMUM•': '•YRMUM•',
             '🌵🪓': '🌵🪓',
-            '💀': '💀',
-            '🍇': '🍇',
             '•❔•': '•❔•',
-            '🇺🇦': '🇺🇦',
             '💸ɢᴏᴠᴛ💸': '💸 ɢᴏᴠᴇʀɴᴍᴇɴᴛ 💸',
             'Ninja': '🎴Ninja Squad⛩',
             'pohui': 'pohui',
             'B4': '[🪓B4]',
-            '🏴': '🏴S.I.T.',
-            '🪬': '🪬',
-            '⭕️': 'ЦАО | ⭕️',
-            '🇳🇱': '🇳🇱•Cheapshot•🇳🇱',
             '🏴‍☠️': '🏴‍☠️',
-            '❌': '❌Team❌',
-            '•🐽•': '•🐽•',
             'Silent': 'Silent',
             'AİLE ❄️': 'AİLE ❄️',
             '.mp4': '.mp4',
             '𝔽𝕃𝔸𝕄𝔼𝔻': '⚔️𝔽𝕃𝔸𝕄𝔼𝔻⚔️',
-            'В4': 'badclan'
+            '🏴': '🏴S.I.T.',
+            '❌': '❌Team❌',
+            '⭕️': 'ЦАО | ⭕️',
+            '🪬': '🪬',
+            '🇳🇱': '🇳🇱•Cheapshot•🇳🇱',
+            '💀': '💀',
+            '🍇': '🍇',
+            'В4': 'badclan',
+            '🇺🇦': '🇺🇦'
             }
 
 headers = {
@@ -71,9 +71,8 @@ async def get_player_clan(username, clanlist):
 
 
 async def get_player_info(meta):
-    # URL FOR META
-    player_info = {}
 
+    player_info = {}
     player_info['userpic'] = meta.get('userpic', '🤖')
     player_info['username'] = meta.get('name', 'ERROR')
     claninfo = await get_player_clan(player_info['username'], clanlist)
@@ -85,7 +84,6 @@ async def get_player_info(meta):
 
 
 async def get_pdragon(kills):
-    # URL FOR KILLS
     pdragons = 0
     if bool(kills["from"]) is not False:
         try:
@@ -97,8 +95,6 @@ async def get_pdragon(kills):
 
 
 async def get_destroy(destroys, playerdata):
-    # URL FOR DESTROYS
-    # playerdata from get_player_info(url)
     points = 0
     try:
         for i in destroys["from"]["items"]:
@@ -118,33 +114,37 @@ async def get_destroy(destroys, playerdata):
 
 
 async def get_monuments_destroyed(page_content, allmonuments):
-    # URL FOR DESTROYS
-    monuments = page_content["special"]
+    destroyed_list = []
     monument_list = []
     monument_points = 0
+    monuments = page_content["special"]
+
 
     for i, b in monuments.items():
         if type(b) != int:
             for monument in b:
                 picname = f"{monument['pic']}{monument['name']}"
-
                 with open("destroyedmonuments.txt", 'r', encoding="utf-8") as f:
                     destroyed_list = [line.rstrip('\n') for line in f]
-
                 if picname not in destroyed_list:
                     cur_monument = {"pic": monument["pic"], "name": monument["name"],
                                     "picname": f"{monument['pic']}{monument['name']}"}
-                    if monument['name'] != 'Mystery Box':
-                        monument_list.append(cur_monument)
+                    if cur_monument['name'] != 'Mystery Box':
                         with open("destroyedmonuments.txt", 'a', encoding="utf-8") as destroyed:
-                            destroyed.write(f"{cur_monument['picname']}\n")
+                            destroyed.write(f"{picname}\n")
+                        monument_list.append(cur_monument)
+                        destroyed_list.append(picname)
                     else:
+                        with open("destroyedmonuments.txt", 'a', encoding="utf-8") as destroyed:
+                            destroyed.write(f"{picname}\n")
+                        destroyed_list.append(picname)
                         monument_points += 3
 
     for i in monument_list:
         for dict_ in allmonuments:
             if dict_["picname"] == i['picname']:
                 monument_points += int(dict_['diff']) + 2
+                
     return monument_points
 
 
@@ -266,6 +266,15 @@ async def fetch_all(session, urls):
 
 async def exp_fetch(session, url, result):
     async with session.post(url, data=result, headers=headers) as response:
+        if response.status != 200:
+            attempts = 100
+            while attempts:
+                async with session.post(url, data=result, headers=headers) as response:
+                    if response.status != 200:
+                        attempts -= 1
+                        await asyncio.sleep(1)
+                    else:
+                        break
         return response.status
 
 
@@ -349,8 +358,10 @@ async def epit_clan(raw_papers, unique):
         '2023-02-26': '🎄'
     }
 
-
-    building = special[date]
+    try:
+        building = special[date]
+    except:
+        building = 'ERROR ERROR ERROR'
 
     for paper in raw_papers:
         worksheet.write_url(0, count, paper["url"], name_format, string=paper['username'])
@@ -388,10 +399,21 @@ async def epit_clan(raw_papers, unique):
     cell_format.set_bg_color('#666666')
     cell_format.set_font_size(11)
 
+    error_format = workbook.add_format()
+    error_format.set_pattern(1)  # This is optional when using a solid fill.
+    error_format.set_bg_color('#ff0000')
+    error_format.set_font_size(11)
+
     for paper in raw_papers:
         for category in categories:
             if category is not building:
-                worksheet.write(offset, count, paper.get(category, 0), cell_format)
+                    if category == 'date':
+                        if date not in list(special.keys()):
+                            worksheet.write(offset, count, 'ERROR DATE', error_format)
+                        else:
+                            worksheet.write(offset, count, paper.get(category, 0), cell_format)
+                    else:
+                        worksheet.write(offset, count, paper.get(category, 0), cell_format)
             else:
                 for i in paper['buildings']:
                     if i['pic'] == building:

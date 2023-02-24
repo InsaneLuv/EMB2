@@ -3,11 +3,15 @@ import requests
 
 from data.config import admins
 from database import search_profile, search_lang
+from filters.admincommand import AdminCommand
 
 from handlers.users.parse_papers_clan import clan_join
 from loader import dp, _
+from states.test import create_event
 from tools.parse_tool_clan.paper_parser_clan import paper_parse_clan
 import re
+
+from utils.misc.throttling import rate_limit
 
 
 tester_ikb_menu = InlineKeyboardMarkup(row_width=2,
@@ -24,6 +28,9 @@ tester_ikb_menu = InlineKeyboardMarkup(row_width=2,
                                     ],
                                     [
                                         InlineKeyboardButton(text='localization checker', callback_data='localization')
+                                    ],
+                                    [
+                                        InlineKeyboardButton(text='create event', callback_data='create_event')
                                     ]
                                 ])
 
@@ -124,3 +131,16 @@ async def call5rp(call: CallbackQuery):
     lang = await search_lang(call.from_user.id)
     await call.bot.edit_message_text(chat_id=call.from_user.id, message_id=call.message.message_id, text=_('ЛОКАЛИЗАЦИЯ'),reply_markup=tester_ikb_menu)
     await call.answer()
+
+@rate_limit(limit=3600)
+@dp.callback_query_handler(AdminCommand(),text="create_event")
+async def event_creator(call: CallbackQuery):
+    await call.bot.send_message(chat_id=call.from_user.id, text=
+                                'Ввод информации производится по правилу "1 пункт = 1 строка"\n\n'
+                                '1.Название ивента\n'
+                                '2.Описание ивента\n'
+                                '3.Ссылка на сообщение\n'
+                                '4.Дата начала(ГГГГ-ММ-ДД)\n'
+                                '5.Кол-во недель\n'
+                                '6.Постройки для каждой недели(через запятую)\n')
+    await create_event.maker.set()
