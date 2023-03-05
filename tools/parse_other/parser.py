@@ -121,7 +121,8 @@ class SheetsClient:
         self.SERVICE_ACCOUNT_FILE = 'tablewriter-379418-eabbc27e7d3f.json'
         self.spreadsheet_id = '1ylRjNBxrdCQmzZVSsOv8r4h7q3IMEJ-AARKz2PGfXyo'
         self.creds = Credentials.from_service_account_file(self.SERVICE_ACCOUNT_FILE)
-        self.service = build('sheets', 'v4', credentials=self.creds)
+        self.DISCOVERY_SERVICE_URL = 'https://sheets.googleapis.com/$discovery/rest?version=v4'
+        self.service = build('sheets', 'v4', credentials=self.creds, discoveryServiceUrl=self.DISCOVERY_SERVICE_URL)
 
     async def insert_result(self, result):
         dates = {
