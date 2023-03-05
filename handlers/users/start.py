@@ -16,7 +16,7 @@ async def command_start(message: types.Message):
                             'Твой id - {id}\n'
                             'Роль - {role}').format(username=message.from_user.username,
                                                     id=message.from_user.id,
-                                                    role=profile[2] if profile != None else "None"), reply_markup=start_ikb_menu)
+                                                    role=profile['role'] if profile != None else "None"), reply_markup=start_ikb_menu)
     else:
         await message.reply(_('Твоё имя - 🚫\n'
                             'Твой id - {id}\n\n'

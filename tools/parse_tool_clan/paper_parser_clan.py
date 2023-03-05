@@ -326,7 +326,8 @@ async def run(urls, mode):
                 }
             
             if mode == "registration":
-                return  await get_player_info(json['meta'], session)
+                result = await get_player_info(jsons['meta'])
+                return result
                 
             results.append(await create_dict(result, jsons))
             results_json.append(json.dumps(result,indent=4, sort_keys=True, separators=(',', ': '), use_decimal=True))
@@ -345,8 +346,7 @@ async def epit_clan(raw_papers, unique):
     filename = f'{raw_papers[0]["clantag"]}-{unique}_{str(timestamp)}.xlsx'
     workbook = xlsxwriter.Workbook(filename)
     worksheet = workbook.add_worksheet()
-    name_format = workbook.add_format()
-    name_format.set_align('center')
+    name_format = workbook.add_format().set_align('center')
     count = 1
 
     date = raw_papers[0]["date"]
@@ -358,75 +358,43 @@ async def epit_clan(raw_papers, unique):
         '2023-02-26': '🎄'
     }
 
-    try:
-        building = special[date]
-    except:
-        building = 'ERROR ERROR ERROR'
+    for i, paper in enumerate(raw_papers):
+        worksheet.write_url(0, i+1, paper["url"], name_format, string=paper['username'])
+        worksheet.set_column(1, i+1, 25)
 
-    for paper in raw_papers:
-        worksheet.write_url(0, count, paper["url"], name_format, string=paper['username'])
-        worksheet.set_column(1, count, 25)
-        count += 1
+    building = special.get(date, 'ERROR ERROR ERROR')
+    categories = ['police', 'police_heli', 'birdie', 'ordinary', 'dragon', 'pdragon', 'alien', 'police_car', 'monument', 'rat', 'destroy', f'{building}', 'clanname', 'date']
+    
+    worksheet.set_column(0, 1, 13)
+    cell_format = workbook.add_format().set_pattern(1).set_bg_color('#666666').set_font_size(11)
+    error_format = workbook.add_format().set_pattern(1).set_bg_color('#ff0000').set_font_size(11)
 
-    count = 1
-    categories = ['police',
-           'police_heli',
-           'birdie',
-           'ordinary',
-           'dragon',
-           'pdragon',
-           'alien',
-           'police_car',
-           'monument',
-           'rat',
-           'destroy',
-           f'{building}',
-           'clanname',
-           'date']
+    for i, category in enumerate(categories):
+        worksheet.write(i+1, 0, category)
 
-    worksheet.set_column(0, count, 13)
-
-    for category in categories:
-        worksheet.write(count, 0, category)
-        count += 1
-
-    count = 1
-
-    offset = 1
-
-    cell_format = workbook.add_format()
-    cell_format.set_pattern(1)  # This is optional when using a solid fill.
-    cell_format.set_bg_color('#666666')
-    cell_format.set_font_size(11)
-
-    error_format = workbook.add_format()
-    error_format.set_pattern(1)  # This is optional when using a solid fill.
-    error_format.set_bg_color('#ff0000')
-    error_format.set_font_size(11)
-
-    for paper in raw_papers:
-        for category in categories:
-            if category is not building:
-                    if category == 'date':
-                        if date not in list(special.keys()):
-                            worksheet.write(offset, count, 'ERROR DATE', error_format)
-                        else:
-                            worksheet.write(offset, count, paper.get(category, 0), cell_format)
-                    else:
-                        worksheet.write(offset, count, paper.get(category, 0), cell_format)
-            else:
-                for i in paper['buildings']:
-                    if i['pic'] == building:
-                        worksheet.write(offset, count, i['count'], cell_format)
-                        break
-                    else:
-                        worksheet.write(offset, count, 0, cell_format)
-            offset += 1
-        count += 1
+    for i, paper in enumerate(raw_papers):
         offset = 1
+        for j, category in enumerate(categories):
+            if category != building:
+                if category == 'date':
+                    if date not in special:
+                        worksheet.write(offset, i+1, 'ERROR DATE', error_format)
+                    else:
+                        worksheet.write(offset, i+1, paper.get(category, 0), cell_format)
+                else:
+                    worksheet.write(offset, i+1, paper.get(category, 0), cell_format)
+            else:
+                found = False
+                for item in paper['buildings']:
+                    if item['pic'] == building:
+                        worksheet.write(offset, i+1, item['count'], cell_format)
+                        found = True
+                        break
+                if not found:
+                    worksheet.write(offset, i+1, 0, cell_format)
+            offset += 1
 
     workbook.close()
-
     return filename
 
                 # settings = {}

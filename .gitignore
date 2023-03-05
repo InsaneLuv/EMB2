@@ -1,5 +1,5 @@
 /.env
-
+.vscode
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -43,3 +43,5 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+tablewriter-379418-eabbc27e7d3f.json

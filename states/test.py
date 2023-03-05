@@ -2,7 +2,9 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
 class create_event(StatesGroup):
+    type = State()
     maker = State()
+    maker_other = State()
     s_setler = State()
     # creator_tg_id = State()
     # title = State()

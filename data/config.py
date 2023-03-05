@@ -28,7 +28,7 @@ chat_ids = [
 ]
 
 settings = [
-    's_police', 's_police_heli', 's_police_car', 's_ordinary', 's_dragon', 's_pdragon', 's_alien','s_rat'
+    's_police', 's_police_heli', 's_police_car', 's_ordinary', 's_dragon', 's_pdragon', 's_alien','s_rat', 's_monument'
 ]
 
 technical_messages = {
@@ -42,9 +42,10 @@ technical_messages = {
     'right_title_example': "[CLAN-WARS] - @cheapshotevent\n" \
                            "[ALIEN-GENOCIDE] - @cheapshothumor",
     
-    'special': '- @Yankeees and "CLAN EVENTS" for cooperation and using bot in their events.\n' \
-               '- @itcig and his service "cheapshot.app" for providing up-to-date information about the monuments.\n\n' \
-               '- And to Everyone who invited their friends to the bot group, thank you for your support ❤️.'
+    'special':  '❤️ @tonyzomba for incredible help, sponsoring clan events and supporting the service.\n' \
+                '❤️ @Yankeees and "CLAN EVENTS" for cooperation and using bot in their events.\n' \
+                '❤️ @itcig and his service "cheapshot.app" for providing up-to-date information about the monuments.\n\n' \
+                '- And to Everyone who invited their friends to the bot group, thank you for your support ❤️.'
                            
 }
 

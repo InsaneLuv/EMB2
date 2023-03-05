@@ -5,4 +5,5 @@ class reger(StatesGroup):
     tg_id = State()
     name_from_paper = State()
     role = State()
+    geopos = State()
 

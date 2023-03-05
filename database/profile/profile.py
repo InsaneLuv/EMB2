@@ -6,8 +6,13 @@ cur = base.cursor()
 
 async def profile_reg(state):
     async with state.proxy() as data:
-        cur.execute('INSERT INTO profiles VALUES (?,?,?)', tuple(data.values()))
+        cur.execute('INSERT INTO profiles VALUES (?,?,?,?,?)', tuple(data.values()))
         base.commit()
+
+
+async def update_adress(adress, tg_id):
+    cur.execute('UPDATE profiles SET adress = ? WHERE tg_id = ?',(adress, tg_id))
+    base.commit()
 
 
 async def search_profile(mode,data):
@@ -15,17 +20,30 @@ async def search_profile(mode,data):
         try:
             cur.execute(f"SELECT * FROM profiles WHERE tg_id = {str(data)}")
             profile = cur.fetchone()
+            profile = {
+            'tg_id': profile[0],
+            'game_name': profile[1],
+            'role': profile[2],
+            'adress': profile[3],
+            'unique': profile[4]
+            }
+            return profile
         except Exception as e:
             return None
     elif mode == "game_name":
         try:
             cur.execute(f"SELECT * FROM profiles WHERE game_name = '{str(data)}'")
             profile = cur.fetchone()
+            profile = {
+            'tg_id': profile[0],
+            'game_name': profile[1],
+            'role': profile[2],
+            'adress': profile[3],
+            'unique': profile[4]
+            }
+            return profile
         except Exception as e:
             return None
-
-    if profile is not None:
-        return profile
 
 async def lang_reg(id,lang):
     try:
