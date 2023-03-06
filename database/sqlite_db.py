@@ -34,12 +34,15 @@ async def sql_start():
                  'type TEXT'
                  ')'
                  )
-        # public['uuid'] = data['uuid']
-        # public['creator_tg_id'] = data['creator_id']
-        # public['event_title'] = data['title']
-        # public['event_description'] = data['description']
-        # public['event_message_url'] = data['message_link']
-        # public['state'] = True
+    
+    base.execute('CREATE TABLE IF NOT EXISTS profile_settings_cooldown'
+                 '('
+                 'tg_id INT,'
+                 'bounty_cd TEXT,'
+                 'game_name_cd TEXT,'
+                 'clan_cd TEXT'
+                 ')'
+                 )
 
     base.execute(f'CREATE TABLE IF NOT EXISTS weeks'
         '('
@@ -69,6 +72,14 @@ async def sql_start():
         'uuid TEXT,'
         'tg_id INT PRIMARY KEY,'
         'game_name TEXT'
+        ')'
+        )
+    
+    base.execute(f'CREATE TABLE IF NOT EXISTS rabbit_event_members'
+        '('
+        'tg_id INT PRIMARY KEY,'
+        'game_name TEXT,'
+        'points INT'
         ')'
         )
 

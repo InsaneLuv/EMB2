@@ -16,7 +16,6 @@ async def event_reg(state):
         cur.execute('INSERT INTO events_point_settings VALUES (?,?)', (event_info[1],'None'))
         base.commit()
 
-
 async def event_update(mode,data, old_data):
     if mode == "name":
         cur.execute('UPDATE events SET event_name=? where event_name=?', (data, old_data))
@@ -33,7 +32,6 @@ async def event_update(mode,data, old_data):
         re_data = re.sub('\n', ',', data)
         cur.execute('UPDATE events_point_settings SET rules=? where event_name=?', (re_data, old_data))
     base.commit()
-
 
 async def event_read(state="current"):
     event_list = []
@@ -57,12 +55,10 @@ async def inline_helper(data):
     event = cur.fetchone()
     return event
 
-
 async def search_event(event_name):
     cur.execute(f"SELECT * FROM events WHERE event_name = (?)", (event_name,))
     event = cur.fetchone()
     return event
-
 
 async def event_reg2(state):
     public = {}
@@ -243,3 +239,18 @@ async def reg_paper(paper_result):
         return True
     else:
         return False
+
+async def reg_player_rabbit(tg_id):
+    profile = await search_profile('tg_id',tg_id)
+    try:
+        cur.execute('INSERT INTO rabbit_event_members VALUES (?,?,?)', (tg_id,profile['game_name'],0))
+        base.commit()
+        return True
+    except:
+        base.commit()
+        return False
+    
+async def get_rabbit_event_member_count():
+    cur.execute("SELECT COUNT(*) FROM rabbit_event_members")
+    result = cur.fetchone()[0]
+    return result

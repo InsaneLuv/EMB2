@@ -1,3 +1,4 @@
+import logging
 import sqlite3 as sq
 
 base = sq.connect('manager.db')
@@ -5,45 +6,29 @@ cur = base.cursor()
 
 
 async def profile_reg(state):
-    async with state.proxy() as data:
-        cur.execute('INSERT INTO profiles VALUES (?,?,?,?,?)', tuple(data.values()))
-        base.commit()
+    cur.execute('INSERT INTO profiles VALUES (?,?,?,?,?)', (state["tg_id"], state["game_name"], state["role"], state["address"], state["unique"], ))
+    base.commit()
 
 
-async def update_adress(adress, tg_id):
-    cur.execute('UPDATE profiles SET adress = ? WHERE tg_id = ?',(adress, tg_id))
+async def update_address(address, tg_id):
+    cur.execute('UPDATE profiles SET address = ? WHERE tg_id = ?',(address, tg_id))
     base.commit()
 
 
 async def search_profile(mode,data):
-    if mode == "tg_id":
-        try:
-            cur.execute(f"SELECT * FROM profiles WHERE tg_id = {str(data)}")
-            profile = cur.fetchone()
-            profile = {
-            'tg_id': profile[0],
-            'game_name': profile[1],
-            'role': profile[2],
-            'adress': profile[3],
-            'unique': profile[4]
-            }
-            return profile
-        except Exception as e:
-            return None
-    elif mode == "game_name":
-        try:
-            cur.execute(f"SELECT * FROM profiles WHERE game_name = '{str(data)}'")
-            profile = cur.fetchone()
-            profile = {
-            'tg_id': profile[0],
-            'game_name': profile[1],
-            'role': profile[2],
-            'adress': profile[3],
-            'unique': profile[4]
-            }
-            return profile
-        except Exception as e:
-            return None
+    try:
+        cur.execute(f"SELECT * FROM profiles WHERE {mode} = (?)", (data,))
+        profile = cur.fetchone()
+        profile = {
+        'tg_id': profile[0],
+        'game_name': profile[1],
+        'role': profile[2],
+        'address': profile[3],
+        'unique': profile[4]
+        }
+        return profile
+    except Exception as e:
+        return None
 
 async def lang_reg(id,lang):
     try:
@@ -61,3 +46,26 @@ async def search_lang(id):
     except:
         await lang_reg(id,'en')
         return 'en'
+
+async def get_profile_settings_cd(tg_id):
+    cur.execute(f"SELECT * FROM profile_settings_cooldown WHERE tg_id = {int(tg_id)}")
+    cooldown = cur.fetchone()
+    if cooldown != None:
+        cooldown = {
+        'bounty_cd': cooldown[1],
+        'game_name_cd': cooldown[2],
+        'clan_cd': cooldown[3]
+        }
+    else:
+        cooldown = {
+        'bounty_cd': '2000-01-01',
+        'game_name_cd': '2000-01-01',
+        'clan_cd': '2000-01-01'
+        }
+        cur.execute('INSERT INTO profile_settings_cooldown VALUES (?,?,?,?)', (tg_id,cooldown["bounty_cd"],cooldown["game_name_cd"],cooldown["clan_cd"]))
+        base.commit()
+    return cooldown
+
+async def set_profile_settings_cd(setting, tg_id, date):
+    cur.execute(f'UPDATE profile_settings_cooldown SET {setting}=? where tg_id=?', (date,tg_id))
+    base.commit()

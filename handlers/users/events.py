@@ -6,7 +6,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQu
 from aiogram.utils.markdown import hlink
 from database import search_profile
 from database.events import event_read, inline_helper, event_update, search_event, get_psettings
-from database.events.events import append_to_access, deny_access_by_tg_id, get_by_uuid, get_eventlist, reg_paper
+from database.events.events import append_to_access, deny_access_by_tg_id, get_by_uuid, get_eventlist, reg_paper, reg_player_rabbit
 from filters import IsSubscriber
 from keyboards.inline import edit_ikb_menu
 from loader import dp, _, bot
@@ -40,7 +40,7 @@ async def command_any_unknown(message: types.Message, state: FSMContext):
     await state.finish()
     await dp.bot.send_message(chat_id=message.from_user.id, text=_('🚨 Действие отклонено\n(Повторите попытку)'))
 
-@dp.callback_query_handler(lambda call: True)
+@dp.callback_query_handler(lambda call: "-" in call.data)
 async def stoptopupcall(callback_query: types.CallbackQuery, state: FSMContext):
     await state.update_data(message_id=callback_query.message.message_id)
     await dp.bot.answer_callback_query(callback_query.id)
@@ -68,6 +68,10 @@ async def call_organizer1(call: CallbackQuery, state: FSMContext):
             await return_popup_error(call.id, 'Нельзя принимать участие в ивенте без регистрации профиля.')
             access = False
 
+        if profile['address'] == 'None':
+            await return_popup_error(call.id, 'Нельзя участвовать в этом ивенте без установленного "💰 Bounty Address" в настройках профиля.')
+            access = False
+
         if event["access"] is not None:
             access_list = {i['tg_id']: i for i in event["access"]}
             if call.from_user.id not in access_list:
@@ -75,13 +79,19 @@ async def call_organizer1(call: CallbackQuery, state: FSMContext):
                 access = False
 
         if access:
-            if event['type'] != 'clan_event':
+            if event['type'] == 'hater':
                 await dp.bot.edit_message_text(
                 chat_id=call.from_user.id,
                 message_id=call.message.message_id,
                 text=f'🗞 Отправь газету.'
                 )
                 await ev_helper.parser.set()
+            elif event['type'] == 'rabbit_event':
+                reg_result = await reg_player_rabbit(call.from_user.id)
+                if reg_result == True:
+                    await bot.answer_callback_query(call.id, _('✅ Вы зарегистрировались в ивенте.'), show_alert=True)
+                else:
+                    await bot.answer_callback_query(call.id, _('❌ Вы уже зарегистрированы в этом ивенте.'), show_alert=True)
             else:
                 await dp.bot.delete_message(call.message.chat.id, call.message.message_id)
                 CancelHandler()

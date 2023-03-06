@@ -29,7 +29,7 @@ async def generate_weeks(date,weeks_count) -> list:
 @dp.callback_query_handler(state=create_event.type)
 async def event_type_handler(call: CallbackQuery, state: FSMContext):
     data = await state.get_data()
-    if call.data == 'rabbit_event':
+    if call.data == 'hater':
         await call.bot.send_message(chat_id=call.from_user.id, text=
                     'Ввод информации производится по правилу "1 пункт = 1 строка"\n\n'
                     '1.Название ивента\n'
@@ -52,6 +52,17 @@ async def event_type_handler(call: CallbackQuery, state: FSMContext):
         data['type'] = call.data
         await state.update_data(data)
         await create_event.maker.set()
+    elif call.data == 'rabbit_event':
+        await call.bot.send_message(chat_id=call.from_user.id, text=
+                    'Ввод информации производится по правилу "1 пункт = 1 строка"\n\n'
+                    '1.Название ивента\n'
+                    '2.Описание ивента\n'
+                    '3.Ссылка на сообщение\n'
+                    '\n\n'
+                    '*Дата начала = дата принятия первых газет, всегда воскресенье.')
+        data['type'] = call.data
+        await state.update_data(data)
+        await create_event.maker_other.set()
     else:
         await state.finish()
         CancelHandler()
