@@ -65,17 +65,17 @@ async def call_organizer1(call: CallbackQuery, state: FSMContext):
     if call.data == "Участвовать":
         profile = await search_profile("tg_id", call.from_user.id)
         if profile is None:
-            await return_popup_error(call.id, 'Нельзя принимать участие в ивенте без регистрации профиля.')
+            await bot.answer_callback_query(call.id, _('❌ Ошибка доступа: Нельзя принимать участие в ивенте без регистрации профиля.'), show_alert=True)
             access = False
 
         if profile['address'] == 'None':
-            await return_popup_error(call.id, 'Нельзя участвовать в этом ивенте без установленного "💰 Bounty Address" в настройках профиля.')
+            await bot.answer_callback_query(call.id, _('❌ Ошибка доступа: Нельзя участвовать в этом ивенте без установленного "💰 Bounty Address" в настройках профиля.'), show_alert=True)
             access = False
 
         if event["access"] is not None:
             access_list = {i['tg_id']: i for i in event["access"]}
             if call.from_user.id not in access_list:
-                await return_popup_error(call.id, 'У вас нет доступа к участию в ивенте.')
+                await bot.answer_callback_query(call.id, _('❌ Ошибка доступа: Организатор закрыл свободный доступ к этому ивенту.'), show_alert=True)
                 access = False
 
         if access:
@@ -91,7 +91,7 @@ async def call_organizer1(call: CallbackQuery, state: FSMContext):
                 if reg_result == True:
                     await bot.answer_callback_query(call.id, _('✅ Вы зарегистрировались в ивенте.'), show_alert=True)
                 else:
-                    await bot.answer_callback_query(call.id, _('❌ Вы уже зарегистрированы в этом ивенте.'), show_alert=True)
+                    await bot.answer_callback_query(call.id, _('✅ Вы уже зарегистрированы в этом ивенте.'), show_alert=True)
             else:
                 await dp.bot.delete_message(call.message.chat.id, call.message.message_id)
                 CancelHandler()
@@ -243,9 +243,6 @@ async def paper_receiver(message: types.Message, state: FSMContext):
         a = await bot.edit_message_text(chat_id=message.from_user.id, message_id=message_id,text=f'{a.text}\n\n🚨 Некорректный ввод.\n',reply_markup=gen_event_markup(message.from_user.id, event),parse_mode="HTML")
     
     await ev_helper.event.set()
-
-async def return_popup_error(callid, errortype):
-    await bot.answer_callback_query(callid, _('❌ Ошибка доступа: {errortype}').format(errortype=errortype), show_alert=True)
 
 def gen_join_markup():
     markup = InlineKeyboardMarkup()

@@ -31,7 +31,7 @@ tester_ikb_menu = InlineKeyboardMarkup(row_width=2,
                                     #     InlineKeyboardButton(text='localization checker', callback_data='localization')
                                     # ],
                                     [
-                                        InlineKeyboardButton(text='create event', callback_data='create_event')
+                                        InlineKeyboardButton(text=_('Создать ивент'), callback_data='create_event')
                                     ]
                                 ])
 

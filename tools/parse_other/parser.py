@@ -97,19 +97,19 @@ class Parser:
         return stat
     
     async def get_player_info(self, meta_json):
-        self.player_info['userpic'] = meta_json.get('userpic','❓')
-        self.player_info['username'] = meta_json.get('name','❓')
-        self.player_info['date'] = meta_json.get('end_date','❓')
+        self.player_info['userpic'] = str(meta_json.get('userpic','❓'))
+        self.player_info['username'] = str(meta_json.get('name','❓'))
+        self.player_info['date'] = str(meta_json.get('end_date','❓'))
         return self.player_info
     
     async def extract_result_data(self):
         player_data = await self.get_player_info(self.jsons['meta'])
 
-        self.result['userpic'] = player_data['userpic']
-        self.result['username'] = player_data['username']
-        self.result['unique_player_id'] = self.unique_player_id
-        self.result['unique_paper_id'] = self.unique_paper_id
-        self.result['date'] = player_data['date']
+        self.result['userpic'] = str(player_data['userpic'])
+        self.result['username'] = str(player_data['username'])
+        self.result['unique_player_id'] = str(self.unique_player_id)
+        self.result['unique_paper_id'] = str(self.unique_paper_id)
+        self.result['date'] = str(player_data['date'])
         self.result['points'] = await self.get_destroy()
         self.result['🕋'] = await self.get_building_count('🕋')
         self.result['⛩'] = await self.get_building_count('⛩')
@@ -126,11 +126,10 @@ class SheetsClient:
 
     async def insert_result(self, result):
         dates = {
-            '2023-03-05': 'WEEK1️⃣',
-            '2023-03-12': 'WEEK2️⃣',
+            '2023-03-12': 'WEEK1️⃣',
             '2023-03-19': 'WEEK3️⃣',
             '2023-03-26': 'WEEK4️⃣',
-            '2023-04-02': 'WEEK5️⃣'
+            '2023-04-02': 'WEEK4️⃣'
         }
         try:
             range_name = dates[str(result['date'])]

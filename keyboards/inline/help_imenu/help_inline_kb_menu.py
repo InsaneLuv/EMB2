@@ -2,17 +2,17 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQu
 
 from data.config import technical_messages
 from data.config import urls
-from loader import dp
+from loader import dp, _
 
 help_ikb_menu = InlineKeyboardMarkup(row_width=2,
                                 inline_keyboard =[
                                     [
-                                        InlineKeyboardButton(text='🧰 Команды', callback_data='Команды'),
-                                        InlineKeyboardButton(text='🔩 Зачем этот бот?', callback_data='Зачем1')
+                                        InlineKeyboardButton(text=_('🧰 Команды'), callback_data='Команды'),
+                                        InlineKeyboardButton(text=_('🔩 Зачем этот бот?'), callback_data='Зачем1')
                                     ],
                                     [
-                                        InlineKeyboardButton(text='🧸 Написать создателю', url=urls['creator']),
-                                        InlineKeyboardButton(text='❤️ Special thanks', callback_data='special')
+                                        InlineKeyboardButton(text=_('🧸 Написать создателю'), url=urls['creator']),
+                                        InlineKeyboardButton(text=_('❤️ Special thanks'), callback_data='special')
                                     ]
                                 ])
 

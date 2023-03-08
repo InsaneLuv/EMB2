@@ -1,6 +1,7 @@
 from aiogram import types
 
 from database import search_profile
+from database.profile.profile import lang_reg
 from filters import IsSubscriber
 from keyboards.inline import start_ikb_menu
 from loader import dp, _
@@ -10,16 +11,10 @@ from utils.misc import rate_limit
 @rate_limit(limit=10)
 @dp.message_handler(IsSubscriber(), text='/start')
 async def command_start(message: types.Message):
+    await lang_reg(message.from_user.id, 'ru')
     if message.from_user.username is not None:
         profile = await search_profile("tg_id", message.from_user.id)
-        await message.reply(_('Твоё имя - @{username}\n'
-                            'Твой id - {id}\n'
-                            'Роль - {role}').format(username=message.from_user.username,
-                                                    id=message.from_user.id,
-                                                    role=profile['role'] if profile != None else "None"), reply_markup=start_ikb_menu)
+        await message.reply(_('Выберите язык.\nChoose language.'), reply_markup=start_ikb_menu)
     else:
-        await message.reply(_('Твоё имя - 🚫\n'
-                            'Твой id - {id}\n\n'
-                            '‼ Для дальнейшего пользования ботом настоятельно рекомендую установить юзернейм в настройках профиля, иначе организатору сложнее будет тебя найти.\n'
-                            '‼ После, отправь /start ещё раз.').format(id=message.from_user.id))
+        await message.reply(_('Для пользования ботом вам нужно установить юзернейм в профиле телеграм.\nЭто нужно для того, что бы организатор мог связаться с вами для выдачи награды.\n<a href="https://web-telegramm.org/telegramm/web/608-kak-zapolnit-username-v-telegramme.html">Инструкция.</a>'),parse_mode="HTML")
 

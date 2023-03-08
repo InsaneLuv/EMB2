@@ -14,7 +14,7 @@ start_ikb_menu = InlineKeyboardMarkup(row_width=2,
                                 ])
 
 @dp.callback_query_handler(text="Rus")
-async def send_message(call: CallbackQuery):
+async def send_message1(call: CallbackQuery):
     await lang_reg(call.from_user.id, 'ru')
     if call.from_user.id in admins:
         await call.bot.delete_message(chat_id=call.from_user.id, message_id=call.message.message_id)
@@ -45,6 +45,6 @@ async def send_message(call: CallbackQuery):
         await call.bot.delete_message(chat_id=call.from_user.id, message_id=call.message.message_id)
         await call.bot.send_message(
             chat_id=call.from_user.id,
-            text="💼 Юзер-мод",
+            text="💼 User mode",
             reply_markup=user_kb_menu_en
         )

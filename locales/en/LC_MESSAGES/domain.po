@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-02-20 08:58+0300\n"
-"PO-Revision-Date: 2023-02-20 06:13+0300\n"
+"POT-Creation-Date: 2023-03-08 23:01+0300\n"
+"PO-Revision-Date: 2023-03-08 22:37+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,191 +18,249 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: handlers/users/buttons.py:15
-#, fuzzy
-msgid "{emoji} Эта команда пока в разработке, возвращайся позже"
-msgstr "There are no events going on right now, come back later"
-
-#: handlers/users/error.py:10
+#: handlers/users/error.py:11
 msgid "🤷🏻 Команды \"{message}\" не существует."
-msgstr "🤷🏻 Command \"{message}\" does not exist."
+msgstr "🤷🏻 Command \"{message} \" does not exist."
 
-#: handlers/users/events.py:22
+#: handlers/users/events.py:27
 msgid ""
 "📍 Выбери интересующий ивент из списка.\n"
 "\n"
-"<em>Все ивенты в этом списке проводятся исключительно их организаторами, "
-"разработчик бота не отвечает за их проведение и выдачу наград.</em>"
+"<em>📣 Все ивенты в этом списке проводятся исключительно их "
+"организаторами, разработчик бота не отвечает за их проведение и выдачу "
+"наград.</em>"
 msgstr ""
-"📍 Choose the event you need from the list.\n"
+"📍 Choose an interesting event from the list. \n"
 "\n"
-"<em>All events in this list are run exclusively by their organisers, the "
-"developer of the bot is not responsible for conducting them and issuing "
-"awards.</em>"
+"<em>📣 All events in this list are exclusively held by their organizers, "
+"the developer of the bot is not responsible for their conduct and "
+"issuanceawards. </em>"
 
-#: handlers/users/events.py:26
+#: handlers/users/events.py:30
 msgid "{emoji} Сейчас не проходит никаких ивентов, возвращайся позже"
-msgstr "There are no events going on right now, come back later"
+msgstr "{emoji} now no events pass, come back later"
 
-#: handlers/users/events.py:80
+#: handlers/users/events.py:41
 msgid ""
-"{emoji} Отправь газеты.\n"
-"\n"
-"(1 строка - 1 ссылка на газету)\n"
-"Не оставляйте пробелы в конце ссылок."
+"🚨 Действие отклонено\n"
+"(Повторите попытку)"
 msgstr ""
-"{emoji} send the newspapers. \n"
-"\n"
-"(1 line - 1 link to the newspaper) \n"
-"Do not leave the gaps at the end of the links."
+"🚨 The action is rejected \n"
+" (Try again)"
 
-#: handlers/users/events.py:91
-msgid "{emoji} Свободное участие сейчас в разработке."
-msgstr "{emoji} Free participation now in development."
+#: handlers/users/events.py:68
+msgid ""
+"❌ Ошибка доступа: Нельзя принимать участие в ивенте без регистрации "
+"профиля."
+msgstr ""
+"❌ Access error: you can not take part in the event without registering "
+"the profile."
 
-#: handlers/users/events.py:342
+#: handlers/users/events.py:72
+msgid ""
+"❌ Ошибка доступа: Нельзя участвовать в этом ивенте без установленного \"💰"
+" Bounty Address\" в настройках профиля."
+msgstr ""
+"❌ Access error: you can not participate in this event without established"
+" \"💰 Bounty Address\" in the profile settings. "
+
+#: handlers/users/events.py:78
+msgid "❌ Ошибка доступа: Организатор закрыл свободный доступ к этому ивенту."
+msgstr "❌ Access error: the organizer closed free access to this event."
+
+#: handlers/users/events.py:92
+msgid "✅ Вы зарегистрировались в ивенте."
+msgstr "✅ You registered in the event."
+
+#: handlers/users/events.py:94
+msgid "✅ Вы уже зарегистрированы в этом ивенте."
+msgstr "✅ You are already registered in this event."
+
+#: handlers/users/events.py:273
 msgid "🎫 Участвовать"
 msgstr "🎫 Join"
 
-#: handlers/users/events.py:345
+#: handlers/users/events.py:276
 msgid "🏃🏻‍ Назад"
 msgstr "🏃🏻 Back"
 
 #: handlers/users/help.py:10
 msgid "🛎 Тебе нужна помощь? Выбери чего ты хочешь."
-msgstr "🛎 Do you need help? Choose what you want."
+msgstr "🛎 Do you need help? Choose what you want. \""
 
-#: handlers/users/parse_papers_clan.py:33
+#: handlers/users/parse_papers_clan.py:63
 msgid ""
 "🚨 Действие отменено\n"
 "(Некорректная ссылка)"
 msgstr ""
-"🚨 Action canceled\n"
-"(Invalid link)"
+"🚨 action canceled \n"
+"(Incorrect link)"
 
-#: handlers/users/parse_papers_clan.py:41
+#: handlers/users/parse_papers_clan.py:70
 msgid "- Компановка газет..."
-msgstr "- Layout of newspapers..."
+msgstr ""
 
-#: handlers/users/parse_papers_clan.py:53
+#: handlers/users/parse_papers_clan.py:83
 msgid ""
 "{a}\n"
 "- Запись запроса в бд..."
 msgstr ""
-"{a}\n"
-"- Writing query to database..."
-
-#: handlers/users/parse_papers_clan.py:57
-msgid ""
-"{a}\n"
-"- Парсинг газет..."
-msgstr ""
-"{a}\n"
-"- Parsing newspapers..."
-
-#: handlers/users/parse_papers_clan.py:60
-msgid ""
-"{a}\n"
-"- Сортировка..."
-msgstr ""
-"{a}\n"
-"- Sorting..."
-
-#: handlers/users/parse_papers_clan.py:66
-msgid ""
-"{a}\n"
-"- Загрузка данных в таблицу..."
-msgstr ""
-"{a}\n"
-"- Loading data into table..."
-
-#: handlers/users/parse_papers_clan.py:68
-msgid ""
-"{a}\n"
-"- Отправка таблицы организатору..."
-msgstr ""
-"{a}\n"
-"- Sending the table to the organizer..."
 
 #: handlers/users/parse_papers_clan.py:87
 msgid ""
 "{a}\n"
+"- Парсинг газет..."
+msgstr ""
+
+#: handlers/users/parse_papers_clan.py:90
+msgid ""
+"{a}\n"
+"- Сортировка..."
+msgstr ""
+
+#: handlers/users/parse_papers_clan.py:98
+msgid ""
+"{a}\n"
+"- Загрузка данных в таблицу..."
+msgstr ""
+
+#: handlers/users/parse_papers_clan.py:100
+msgid ""
+"{a}\n"
+"- Отправка таблицы организатору..."
+msgstr ""
+
+#: handlers/users/parse_papers_clan.py:134
+msgid ""
+"{a}\n"
 "- Удаление остаточных файлов..."
 msgstr ""
-"{a}\n"
-"- Deleting residual files..."
 
-#: handlers/users/parse_papers_clan.py:91
+#: handlers/users/parse_papers_clan.py:138
 msgid ""
 "{a}\n"
 "\n"
 "✅ Газеты отправлены организатору, спасибо за участие!"
 msgstr ""
-"{a}\n"
-"\n"
-"✅ Newspapers sent to the organizer, thanks for participating!"
 
-#: handlers/users/profile.py:26
-msgid "👤 Ваш профиль не найден, пройти регистрацию?"
-msgstr "👤 Your profile was not found, please register?"
-
-#: handlers/users/profile.py:36
+#: handlers/users/profile.py:29
 msgid ""
-"👤 Отправь ЛЮБУЮ свою газету с акутальным внутриигровым ником.\n"
-"(Использование чужой газеты наказуемо)"
+"Ваш профиль:\n"
+" {profile_out}"
 msgstr ""
-"👤 Submit ANY newspaper of yours with a trendy in-game nickname.\n"
-"(Using someone else's newspaper is punishable)"
+"Your profile: \n"
+"{profile_out}"
 
-#: handlers/users/profile.py:81
+#: handlers/users/profile.py:31
+msgid "👤 Ваш профиль не найден, пройти регистрацию?"
+msgstr "👤 Your profile was not found, register?"
+
+#: handlers/users/profile.py:46
+msgid ""
+"👤 Отправь свою газету с актуальным внутриигровым ником.\n"
+"(Дата газета не важна, важнен никнейм.)"
+msgstr ""
+"👤 Send your newspaper with the current intra -game nickname. \n"
+"(The date of the newspaper is not important, Important nickname.)"
+
+#: handlers/users/profile.py:59
+msgid "Изменение будет доступно: {input_date}"
+msgstr "The change will be available: {input_date}"
+
+#: handlers/users/profile.py:70
+msgid ""
+"💰 Отправьте вашу геопозицию:\n"
+"1. 📎 Прикрепить.\n"
+"2. 📍 Геопозиция.\n"
+"3. 📍 Отправить геопозицию.\n"
+"\n"
+"(Следуюшее изменение будет доступно через 3 дня)"
+msgstr ""
+"💰 Send your geopolia: \n"
+"1. 📎 attach. \n"
+"2. 📍 Geopers. \n"
+"3. 📍 Send the geopolitance. \n"
+"\n"
+"(The next change will be available in 3 days)"
+
+#: handlers/users/profile.py:179
 msgid "👤 На этот никнейм уже была произведена регистрация"
 msgstr "👤 This nickname has already been registered"
 
-#: handlers/users/start.py:15
+#: handlers/users/start.py:17
 msgid ""
-"Твоё имя - @{username}\n"
-"Твой id - {id}\n"
-"Роль - {role}"
+"Выберите язык.\n"
+"Choose language."
 msgstr ""
-"Your name is @{username}\n"
-"Your id is {id}\n"
-"Role - {role}"
 
-#: handlers/users/start.py:21
+#: handlers/users/start.py:19
 msgid ""
-"Твоё имя - 🚫\n"
-"Твой id - {id}\n"
-"\n"
-"‼ Для дальнейшего пользования ботом настоятельно рекомендую установить "
-"юзернейм в настройках профиля, иначе организатору сложнее будет тебя "
-"найти.\n"
-"‼ После, отправь /start ещё раз."
+"Для пользования ботом вам нужно установить юзернейм в профиле телеграм.\n"
+"Это нужно для того, что бы организатор мог связаться с вами для выдачи "
+"награды.\n"
+"<a href=\"https://web-telegramm.org/telegramm/web/608-kak-zapolnit-"
+"username-v-telegramme.html\">Инструкция.</a>"
 msgstr ""
-"Your name is 🚫\n"
-"Your id is {id}\n"
-"\n"
-"‼ For further use of the bot, I strongly recommend installing username in"
-" the profile settings, otherwise the organizer will have a harder time "
-"with youfind.\n"
-"‼ After, send /start again."
+"To use the bot, you need to install the user in the profile of telegram."
+" \n"
+"This is necessary in order for the organizer to contact you for issuing "
+"Awards.\n"
+"<a href =\"https://web-telegramm.org/telegramm/web/608-kak-zapolnit-"
+"username-v-telegramme.html\">instruction.</a> "
 
 #: handlers/users/tools.py:12
 msgid "🛠 Выбери инструмент:"
 msgstr "🛠 Choose a tool:"
 
-#: keyboards/inline/tester_imenu/tester_inline_kb_menu.py:125
-msgid "ЛОКАЛИЗАЦИЯ"
-msgstr "enlish"
+#: keyboards/inline/help_imenu/help_inline_kb_menu.py:10
+msgid "🧰 Команды"
+msgstr "🧰 Commands"
 
-#~ msgid "📍 Текущие ивенты"
-#~ msgstr "📍 Current events"
+#: keyboards/inline/help_imenu/help_inline_kb_menu.py:11
+msgid "🔩 Зачем этот бот?"
+msgstr "🔩 Why this bot?"
 
-#~ msgid "⚒ Инструменты"
-#~ msgstr "🛠 Choose a tool:"
+#: keyboards/inline/help_imenu/help_inline_kb_menu.py:14
+msgid "🧸 Написать создателю"
+msgstr "🧸 Creator"
 
-#~ msgid "👤 Профиль"
-#~ msgstr "👤 Profile"
+#: keyboards/inline/help_imenu/help_inline_kb_menu.py:15
+msgid "❤️ Special thanks"
+msgstr ""
 
-#~ msgid "🛎 Помощь"
-#~ msgstr "🛎 Help"
+#: keyboards/inline/registration_imenu/registration_inline_kb_menu.py:7
+msgid "✅ Пройти регистрацию"
+msgstr "✅ Pass the registration"
+
+#: keyboards/inline/registration_imenu/registration_inline_kb_menu.py:8
+#: keyboards/inline/registration_imenu/registration_inline_kb_menu.py:16
+msgid "⛔ Отменить действие"
+msgstr "⛔ cancel the action"
+
+#: keyboards/inline/registration_imenu/registration_inline_kb_menu.py:15
+msgid "✅ Да, это я"
+msgstr "✅ Yes, it's me"
+
+#: keyboards/inline/tester_imenu/tester_inline_kb_menu.py:34
+msgid "Создать ивент"
+msgstr "Create an event"
+
+#: keyboards/inline/tools_imenu/tools_inline_kb_menu.py:16
+msgid "Кол-во участников 🐰🩸"
+msgstr ""
+
+#: keyboards/inline/tools_imenu/tools_inline_kb_menu.py:29
+msgid "Текущее количество участников - {count}"
+msgstr "The current number of participants - {count}"
+
+#: middlewares/throttling.py:69
+msgid ""
+"💤 Слишком частое использование команды.\n"
+"Попробуй ещё раз позже."
+msgstr ""
+"💤 too frequent use of the command. \n"
+"Try it again later."
+
+#~ msgid "❌ Ошибка доступа: {errortype}"
+#~ msgstr "❌ Access error: {erortype}"
 
