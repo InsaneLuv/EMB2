@@ -74,12 +74,11 @@ class Parser:
         points = 0
         try:
             for item in self.jsons['destroys']['from']['items']:
-                if item.get('name') == 'Squi':
-                    for building, stat in item['stats'].items():
-                        if building == '🕋':
-                            points += stat * 2
-                        elif building == '⛩':
-                            points += stat * 5
+                for building, stat in item['stats'].items():
+                    if building == '🕋':
+                        points += stat * 2
+                    elif building == '⛩':
+                        points += stat * 5
         except KeyError:
             pass
         return points
@@ -88,10 +87,9 @@ class Parser:
         stat = 0
         try:
             for item in self.jsons['destroys']['from']['items']:
-                if item.get('name') == 'Squi':
-                    for building, count in item['stats'].items():
-                        if building == desired:
-                            return count
+                for building, count in item['stats'].items():
+                    if building == desired:     
+                        stat += count
         except KeyError:
             pass
         return stat
