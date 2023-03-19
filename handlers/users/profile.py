@@ -6,7 +6,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, location, ContentTypes
-
+from aiogram import md
 from data.config import admins
 from database import profile_reg, search_profile
 from database.profile.profile import get_profile_settings_cd, set_profile_settings_cd, update_address
@@ -26,7 +26,8 @@ async def button_profile_react(message: types.Message, state: FSMContext):
     profile_info = await search_profile("tg_id",message.from_user.id)
     if profile_info != None:
         profile_out = await get_profile_out(message.from_user.id)
-        await bot.send_message(chat_id=message.from_user.id, text=_('Ваш профиль:\n {profile_out}').format(profile_out=profile_out), reply_markup=edit_profile(),parse_mode="Markdown")
+        print(profile_out)
+        await bot.send_message(chat_id=message.from_user.id, text=_('Ваш профиль:\n {profile_out}').format(profile_out=profile_out), reply_markup=edit_profile(),parse_mode="HTML")
     else:
         a = await bot.send_message(chat_id=message.from_user.id, text=_('👤 Ваш профиль не найден, пройти регистрацию?'),reply_markup=registration_ikb_menu)
         await state.update_data(message_id=a.message_id)
@@ -79,7 +80,7 @@ async def bounty(call: CallbackQuery, state: FSMContext):
             profile_out = await get_profile_out(call.from_user.id)
             await bot.edit_message_text(message_id=msgid, chat_id=call.from_user.id,
                             text='⏱ Editing on cooldown.\n'
-                            f'{profile_out}', reply_markup=edit_profile(),parse_mode="Markdown")
+                            f'{profile_out}', reply_markup=edit_profile(),parse_mode="HTML")
         except:
             pass
         CancelHandler()
@@ -110,14 +111,14 @@ async def state2_reg(message: types.Message, state: FSMContext):
             await bot.edit_message_text(message_id=msgid, chat_id=message.from_user.id,
                                         text=
                                         '🥳 Profile updated!\n'
-                                        f'{profile_out}', reply_markup=edit_profile(),parse_mode="Markdown")
+                                        f'{profile_out}', reply_markup=edit_profile(),parse_mode="HTML")
         except Exception as e:
             logging.warning(e)
             await bot.delete_message(message_id=message.message_id, chat_id=message.from_user.id)
             await bot.edit_message_text(message_id=msgid, chat_id=message.from_user.id,
                                 text=
                                 '❌ Error while updating.\n'
-                                f'{profile_out}', reply_markup=edit_profile(),parse_mode="Markdown")
+                                f'{profile_out}', reply_markup=edit_profile(),parse_mode="HTML")
         CancelHandler()
         await state.finish()
     else:
@@ -125,16 +126,16 @@ async def state2_reg(message: types.Message, state: FSMContext):
         await bot.edit_message_text(message_id=msgid, chat_id=message.from_user.id,
                                 text=
                                 '❌ Incorrect input.\n'
-                                f'{profile_out}', reply_markup=edit_profile(),parse_mode="Markdown")
+                                f'{profile_out}', reply_markup=edit_profile(),parse_mode="HTML")
         CancelHandler()
         await state.finish()
 
 async def get_profile_out(tg_id):
     profile_info = await search_profile("tg_id",tg_id)
-    output = f'🆔: {profile_info["tg_id"]}\n' \
-             f'👤: {profile_info["game_name"]}\n' \
-             f'💼: {profile_info["role"]}\n' \
-             f'💰: `{profile_info["address"]}`'
+    output = f'🆔: <code>{md.quote_html(profile_info["tg_id"])}</code>\n' \
+             f'👤: <code>{md.quote_html(profile_info["game_name"])}</code>\n' \
+             f'💼: {md.quote_html(profile_info["role"])}\n' \
+             f'💰: <code>{md.quote_html(profile_info["address"])}</code>'
     return output
 
 @dp.message_handler(state=reger.tg_id)
@@ -156,7 +157,7 @@ async def state1_reg(message: types.Message, state: FSMContext):
             parser = Parser(answer)
             result = await parser.parse()
             username = str(result['username'])
-            await bot.edit_message_text(message_id=msgid, chat_id=message.from_user.id,text=f"Вы - `{username}`?",reply_markup=yes_no_ikb_menu, parse_mode='Markdown')
+            await bot.edit_message_text(message_id=msgid, chat_id=message.from_user.id,text=f"Вы - `{username}`?",reply_markup=yes_no_ikb_menu, parse_mode='HTML')
             await state.update_data(tg_id=message.from_user.id)
             await state.update_data(name_from_paper=result['username'])
             await reger.next()
@@ -188,13 +189,14 @@ async def call1(call: CallbackQuery, state: FSMContext):
             }
             await profile_reg(profile)
             profile_info = await search_profile("tg_id", call.from_user.id)
+            output = f'🆔: <code>{md.quote_html(profile_info["tg_id"])}</code>\n' \
+             f'👤: <code>{md.quote_html(profile_info["game_name"])}</code>\n' \
+             f'💼: {md.quote_html(profile_info["role"])}\n' \
+             f'💰: <code>{md.quote_html(profile_info["address"])}</code>'
             await bot.edit_message_text(message_id=msgid, chat_id=call.from_user.id,
                                     text=
                                     '🥳 Профиль обновлён!\n'
-                                    f'🆔: {profile_info["tg_id"]}\n'
-                                    f'👤: {profile_info["game_name"]}\n'
-                                    f'💼: {profile_info["role"]}\n'
-                                    f'💰: {profile_info["address"]}', reply_markup=edit_profile(), parse_mode='Markdown')
+                                    f'{output}', reply_markup=edit_profile(), parse_mode='HTML')
             CancelHandler()
             await state.finish()
         else:
