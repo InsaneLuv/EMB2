@@ -42,4 +42,4 @@ class IsSubscriber(BoundFilter):
                 reply_markup=markup
             )
         except Exception as e:
-            print(e)
+            pass

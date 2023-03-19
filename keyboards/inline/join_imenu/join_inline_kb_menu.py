@@ -17,7 +17,7 @@ join_ikb_menu = InlineKeyboardMarkup(row_width=2,
 
 @dp.callback_query_handler(text="Отправить_газеты")
 async def send_message(call: CallbackQuery):
-    print(call)
+    pass
 
 
 

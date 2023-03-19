@@ -26,7 +26,6 @@ async def button_profile_react(message: types.Message, state: FSMContext):
     profile_info = await search_profile("tg_id",message.from_user.id)
     if profile_info != None:
         profile_out = await get_profile_out(message.from_user.id)
-        print(profile_out)
         await bot.send_message(chat_id=message.from_user.id, text=_('Ваш профиль:\n {profile_out}').format(profile_out=profile_out), reply_markup=edit_profile(),parse_mode="HTML")
     else:
         a = await bot.send_message(chat_id=message.from_user.id, text=_('👤 Ваш профиль не найден, пройти регистрацию?'),reply_markup=registration_ikb_menu)

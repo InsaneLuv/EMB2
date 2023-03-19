@@ -14,5 +14,5 @@ async def troublelog(user,log,answer):
         with open("troublelogs/tlogs.txt", 'a', encoding="utf-8") as f:
             f.write(trouble)
     except:
-        print('troublelog error')
+        pass
 
