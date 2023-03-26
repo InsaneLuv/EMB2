@@ -125,8 +125,8 @@ class SheetsClient:
     async def insert_result(self, result):
         dates = {
             '2023-03-12': 'WEEK1️⃣',
-            '2023-03-19': 'WEEK3️⃣',
-            '2023-03-26': 'WEEK4️⃣',
+            '2023-03-19': 'WEEK2️⃣',
+            '2023-03-26': 'WEEK3️⃣',
             '2023-04-02': 'WEEK4️⃣'
         }
         try:

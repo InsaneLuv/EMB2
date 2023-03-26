@@ -67,7 +67,7 @@ async def call_organizer1(call: CallbackQuery, state: FSMContext):
         if profile is None:
             await bot.answer_callback_query(call.id, _('❌ Ошибка доступа: Нельзя принимать участие в ивенте без регистрации профиля.'), show_alert=True)
             access = False
-
+        
         if profile['address'] == 'None':
             await bot.answer_callback_query(call.id, _('❌ Ошибка доступа: Нельзя участвовать в этом ивенте без установленного "💰 Bounty Address" в настройках профиля.'), show_alert=True)
             access = False
